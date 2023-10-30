@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css')}}" rel="stylesheet"/>
+    <link type="text/css" href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet"/>
+    <title>{{session.get('login')}}</title>
+</head>
+<body>
+<ul class="nav">
+    {% for m in menu %}
+    <li class="nav-item"><a class="nav-link" href="{{m['url']}}">{{m['name']}}</a></li>
+    {% endfor %}
+</ul>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Ссылка</th>
+        <th scope="col">Псевдоним</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Просмотры</th>
+        <th scope="col">Редактировать</th>
+        <th scope="col">Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for link in links %}
+    <tr>
+        <td>{{link[1]}}</td>
+        <td>{{link[2]}}</td>
+        <td>{{link[3]}}</td>
+        <td>{{link[4]}}</td>
+        <td>
+            <form action="/red" method="post">
+                <button name="red" value="{{link[0]}}">Редактировать</button>
+            </form>
+        </td>
+        <td>
+            <form action="/del" method="post">
+                <button name="del" value="{{link[0]}}">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</body>
+</html>

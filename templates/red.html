@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css')}}"
+      rel="stylesheet"
+    />
+    <title>Редактирование</title>
+  </head>
+  <body>
+    
+    <form action="/redact" method="post" class="rform">
+        <h1>Изменить</h1>
+      <div class="rblock">
+        <p>Псевдоним</p>
+        <input type="text" name="psev" class="lin" value="{{linkk[2]}}" />
+        <p>Тип:</p>
+        <select name="type">
+          <option id="private" selected>Приватная</option>
+          <option id="public">Публичная</option>
+          <option id="ogr">Общего доступа</option>
+        </select>
+      </div>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul class="flashes ifl">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+      <button name="r" class="ibtn" value="{{linkk[0]}}">Готово</button>
+    </form>
+  </body>
+</html>

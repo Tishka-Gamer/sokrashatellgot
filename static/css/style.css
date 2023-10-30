@@ -1,0 +1,55 @@
+.nav {
+    background-color: black;
+    font-size: 35px;
+}
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+.nav-link:hover {
+    color: aqua;
+}
+.index {
+    width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+}
+.iblock {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+}
+.ibtn {
+    width: 150px;
+    background-color: black;
+    color: white;
+}
+.ibtn:hover {
+    color: rgb(164, 220, 234);
+}
+.ifl {
+    list-style-type: none;
+}
+.rform {
+    width: 500px;
+    margin: auto;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.rblock {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+}
+.lin {
+    width: 300px;
+}

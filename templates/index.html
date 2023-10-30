@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      type="text/css"
+      href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css')}}"
+      rel="stylesheet"
+    />
+    <title>Title</title>
+  </head>
+  <body>
+    <ul class="nav">
+      {% for m in menu %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{m['url']}}">{{m['name']}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <form action="/create" method="post" class="form-create index">
+      <h1>Сокращатель ссылок</h1>
+      <div class="iblock">
+        <p>Введите ссылку</p>
+        <input type="text" name="search" required />
+
+        {% if session.get('user') %}
+        <p>Ссылка будет:</p>
+        <select name="type">
+          <option value="private">Приватная</option>
+          <option value="public" selected>Публичная</option>
+          <option value="ogr">Общего доступа</option>
+        </select>
+        {%else%}
+        <p>Ссылка будет: Публичной</p>
+        <p></p>
+        {% endif %}
+        <p>Хотите сделать ссылку именованой?</p>
+        <input type="checkbox" name="chek" class="chek" checked/>
+        <p>Введите псевдоним</p>
+        <input type="text" name="psev" class="psev" />
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="flashes ifl">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+      </div>
+      <input type="submit" class="ibtn" name="create" value="Создать" />
+        <p>{{session['link']}}</p>
+    </form>
+    <script>
+      document.querySelector(".chek").addEventListener("change", function (e) {
+        document.querySelector(".psev").disabled = !e.currentTarget.checked;
+      });
+    </script>
+  </body>
+</html>
