@@ -15,17 +15,24 @@
     <title>Редактирование</title>
   </head>
   <body>
-    
+ <ul class="nav">
+      {% for m in menu %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{m['url']}}">{{m['name']}}</a>
+      </li>
+      {% endfor %}
+    </ul>
     <form action="/redact" method="post" class="rform">
         <h1>Изменить</h1>
       <div class="rblock">
         <p>Псевдоним</p>
-        <input type="text" name="psev" class="lin" value="{{linkk[2]}}" />
+        <input type="text" name="psev" class="lin" value="{{redd[3]}}" />
+        <input type="text" name="poln" value="{{redd[0]}}/{{redd[1]}}/{{redd[2]}}/" hidden />
         <p>Тип:</p>
         <select name="type">
-          <option id="private" selected>Приватная</option>
-          <option id="public">Публичная</option>
-          <option id="ogr">Общего доступа</option>
+          <option value="private" selected>Приватная</option>
+          <option value="public">Публичная</option>
+          <option value="ogr">Общего доступа</option>
         </select>
       </div>
       {% with messages = get_flashed_messages() %} {% if messages %}

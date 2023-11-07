@@ -17,13 +17,20 @@
   <body>
     {% if session.get('auto')%} {{ url_for('index') }} {% endif %} {% block
     content %}
+     <ul class="nav">
+      {% for m in menu %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{m['url']}}">{{m['name']}}</a>
+      </li>
+      {% endfor %}
+    </ul>
     <form action="/auto" method="post" class="form-conact rform">
       <div class="rblock">
         <p>Введите логин</p>
         <input type="text" name="login" value="" required />
         <p>введите пароль</p>
         <input type="password" name="psw" value="" required />
-        
+
         <br />
       </div>
       {% with messages = get_flashed_messages() %} {% if messages %}
