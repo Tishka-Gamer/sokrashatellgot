@@ -98,7 +98,7 @@ def autos():
     else:
         flash('руки крюки')
         print('руки крюки')
-    return render_template('/auto.html')
+    return render_template('/auto.html', menu=menu)
 
 
 @app.route('/reg', methods=['POST', 'GET'])
@@ -120,6 +120,7 @@ def regs():
         else:
             flash('логин и пароль должны быть больше 4 символов, пароли должны совпадать')
             return redirect(url_for('reg'))
+    return render_template('/reg.html', menu=menu)
 
 
 @app.route('/create', methods=['POST', 'GET'])
@@ -227,8 +228,14 @@ def red():
 def redact():
     if request.method == 'POST':
         link = request.form['r']
+        l = request.form['l']
         type = request.form['type']
-        psev =request.form['poln']+request.form['psev']
+        psev = ''
+        if(request.form['psev'] != ""):
+            psev = request.form['poln']+request.form['psev']
+        else:
+            links = hashlib.md5(l.encode()).hexdigest()[:random.randint(8, 12)]
+            psev = request.form['poln'] + links
         dbase.updat(link, psev, type)
         return redirect(url_for('prof'))
     else:
